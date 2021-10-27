@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.15.5",
     "bootstrap": "^4.3.1",
     "lodash": "^4.17.11",
     "react": "^17.0.1",
@@ -11,7 +12,7 @@
     "react-icons": "^3.7.0",
     "react-scripts": "4.0.1",
     "react-spinners": "^0.11.0",
-    "reactstrap": "^8.9.0",
+    "reactstrap": "^8.10.1",
     "web-vitals": "^1.1.2",
     "youtube-api-search": "0.0.5"
   },
