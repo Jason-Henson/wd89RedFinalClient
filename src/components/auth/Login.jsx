@@ -28,7 +28,7 @@ class Login extends Component {
   
       return (
         <div>
-          <h1>Hello From Signup</h1>
+          <h1>Hello From Login</h1>
           <Form>
           <FormGroup>
           <Label for="exampleEmail">User Name</Label>
