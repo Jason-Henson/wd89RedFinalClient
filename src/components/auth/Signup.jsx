@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 class Signup extends React.Component {
   constructor(props) {
@@ -10,31 +10,7 @@ class Signup extends React.Component {
       passWord: "",
       sessionToken: "",
     };
-
-    // this.handleUserNameChange = this.handleUserNameChange.bind(this)
-    // this.handleEmailChange = this.handleEmailChange.bind(this)
-    // this.handlePassWordChange = this.handlePassWordChange.bind(this)
   }
-
-  // sessionToken = this.props.sessionToken
-
-  //
-//   handleUserNameChange(e) { 
-//     this.setState({ userName: e.target.value });
-//     console.log(this.state.userName)
-//   }
-
-//  handleEmailChange(e) {
-//     this.setState({ email: e.target.value });
-//     console.log(this.state.email)
-//   }
-
-//   handlePassWordChange(e) {
-//     this.setState({ passWord: e.target.value });
-//     console.log(this.state.passWord)
-  // }
-
-  // user: { userName: this.state.userName, email: this.state.e, passwordhash: this.state.passWord },
 
   handleSubmit = () => {
     fetch(`http://localhost:3000/user/create`, {
@@ -50,8 +26,6 @@ class Signup extends React.Component {
       this.props.updateToken(fetchResult.sessionToken)
       console.log(fetchResult)
     })
-   
-
   }
   
   render() {

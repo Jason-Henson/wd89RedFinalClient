@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 class Login extends Component {
     constructor(props) {
@@ -8,20 +8,24 @@ class Login extends Component {
       this.state = {
         userName: "",
         passWord: "",
+        sessionToken: "", 
       };
-  
-      this.handleUseNameChange = this.handleUseNameChange(this);
-      this.handlePasswordhashChange = this.handlePasswordhashChange(this);
-  
-      const handleUseNameChange = (e) => {
-        this.setState({ userName: e.target.value });
-        console.log(this.state.value)
-      }
-  
-      const handlePasswordhashChange = (e) => {
-        this.setState({ userName: e.target.value });
-        console.log(this.state.value)
-      }
+    }
+
+    handleSubmit = () => {
+      fetch(`http://localhost:3000/user/login`, {
+        method: "POST",
+        body: JSON.stringify({user: { userName: this.state.userName, passwordhash: this.state.passWord }}),
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+     
+      })
+      .then((res) => res.json())
+      .then((fetchResult) => {
+        this.props.updateToken(fetchResult.sessionToken)
+        console.log(fetchResult)
+      })
     }
   
     render() {  
@@ -32,13 +36,13 @@ class Login extends Component {
           <Form>
           <FormGroup>
           <Label for="exampleEmail">User Name</Label>
-          <Input type="text" name="userName" id="userName" placeholder="User name" onChange={this.handleUseNameChange} />
+          <Input type="text" name="userName" id="userName" placeholder="User name" value={this.state.userName} onChange={(e) => this.setState({userName: e.target.value})} />
         </FormGroup>
         <FormGroup>
           <Label for="examplePassword">Password</Label>
-          <Input type="passwordhash" name="passwordhash" id="passwordhash" placeholder="Password" onChange={this.handlePasswordhashChange} />
+          <Input type="passwordhash" name="passwordhash" id="passwordhash" placeholder="Password" value={this.state.passWord} onChange={(e) => this.setState({passWord: e.target.value})} />
         </FormGroup>
-        <Button>Sign Up</Button>
+        <Button onClick={this.handleSubmit}>Sign Up</Button>
       </Form>
         </div>
       );

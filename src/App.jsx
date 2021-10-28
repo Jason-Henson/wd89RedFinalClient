@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import Login from './components/auth/Login';
+import Login from "./components/auth/Login";
 import Signup from './components/auth/Signup';
 
 
@@ -32,7 +32,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>My Med Minder</h1>
-        <Signup updateToken={this.updateToken}/>
+        {/* <Signup updateToken={this.updateToken}/> */}
+        <Login updateToken={this.updateToken} />
 
       </div>
     )
