@@ -32,7 +32,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>My Med Minder</h1>
-        <Signup updateToken={this.sessionToken}/>
+        <Signup updateToken={this.updateToken}/>
 
       </div>
     )
