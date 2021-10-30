@@ -35,14 +35,14 @@ class Login extends Component {
           <h1>Hello From Login</h1>
           <Form>
           <FormGroup>
-          <Label for="exampleEmail">User Name</Label>
+          <Label for="userName">User Name</Label>
           <Input type="text" name="userName" id="userName" placeholder="User name" value={this.state.userName} onChange={(e) => this.setState({userName: e.target.value})} />
         </FormGroup>
         <FormGroup>
-          <Label for="examplePassword">Password</Label>
+          <Label for="passwordhash">Password</Label>
           <Input type="passwordhash" name="passwordhash" id="passwordhash" placeholder="Password" value={this.state.passWord} onChange={(e) => this.setState({passWord: e.target.value})} />
         </FormGroup>
-        <Button onClick={this.handleSubmit}>Sign Up</Button>
+        <Button onClick={this.handleSubmit}>Login</Button>
       </Form>
         </div>
       );

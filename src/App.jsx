@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Login from "./components/auth/Login";
 import Signup from './components/auth/Signup';
+import FamilyAdd from "./components/family/FamilyAdd";
 
 
 class App extends React.Component {
@@ -13,7 +14,7 @@ class App extends React.Component {
   
   componentDidMount() {
     if (localStorage.getItem("token")) {
-      this.setState({ sessionToken: ""})
+      this.setState({ sessionToken: localStorage.getItem('token')})
     }
   }
 
@@ -34,6 +35,7 @@ class App extends React.Component {
         <h1>My Med Minder</h1>
         {/* <Signup updateToken={this.updateToken}/> */}
         <Login updateToken={this.updateToken} />
+        <FamilyAdd updateToken={this.updateToken} token={this.state.sessionToken}/>
 
       </div>
     )
