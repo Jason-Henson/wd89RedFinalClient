@@ -3,6 +3,7 @@ import Login from "./components/auth/Login";
 import Signup from './components/auth/Signup';
 import FamilyAdd from "./components/family/FamilyAdd";
 import FamilyAll from "./components/family/FamilyAll";
+import FamilyIndex from "./components/family/FamilyIndex";
 
 
 
@@ -10,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sessionToken: localStorage.getItem('token') || ""
+      sessionToken: localStorage.getItem('token') || "" // assigns token from local storage or give empty string
     }
   }
   
@@ -38,7 +39,7 @@ class App extends React.Component {
         {/* <Signup updateToken={this.updateToken}/> */}
         <Login updateToken={this.updateToken} />
         {/* <FamilyAdd updateToken={this.updateToken} token={this.state.sessionToken}/> */}
-        <FamilyAll updateToken={this.updateToken} token={this.state.sessionToken}/>
+        <FamilyIndex updateToken={this.updateToken} token={this.state.sessionToken}/>
       </div>
     )
   }
