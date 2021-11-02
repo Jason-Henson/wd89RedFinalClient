@@ -4,8 +4,7 @@ import Signup from './components/auth/Signup';
 import FamilyAdd from "./components/family/FamilyAdd";
 import FamilyAll from "./components/family/FamilyAll";
 import FamilyIndex from "./components/family/FamilyIndex";
-
-
+import FamilyUpdate from "./components/family/FamUpdate";
 
 class App extends React.Component {
   constructor(props) {
