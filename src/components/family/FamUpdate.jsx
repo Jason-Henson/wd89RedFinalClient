@@ -14,12 +14,17 @@ import {
 class FamilyUpdate extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      famMember: this.props.familyMemberData.famMember,
+      famAge: this.props.familyMemberData.famAge,
+      famAllergic: false,
+    };
   }
 
   componentDidMount() {
     if (localStorage.getItem("token")) {
       this.setState({ sessionToken: localStorage.getItem("token") });
-      console.log("family member data", this.props.familyMemberData)
+      console.log("family member data", this.props.familyMemberData);
     }
   }
   handleSubmit = (e) => {
@@ -41,22 +46,22 @@ class FamilyUpdate extends React.Component {
     })
       .then((res) => res.json())
       .then((fetchResult) => {
-        console.log(fetchResult);
-        //Close the modal with using this.props.hideModal()
-        // Re run the getall function from the FamilyAll.jsx  this.props.blah
+        console.log(fetchResult)
+        this.props.hideModal()
+        this.familyFetch()
       })
       .catch((err) => console.log(err));
   };
 
   hideModal = () => {
-    this.setState({ showModal: false })
+    this.setState({ showModal: false });
   };
   render() {
     return (
       <div>
-        <Button color="danger" onClick={function noRefCheck() {}}>
-          Click Me
-        </Button>
+        {/* <Button color="danger" onClick={function noRefCheck() {}}>
+          Jason
+        </Button> */}
         <Modal
           isOpen={true}
           backdrop={false}
@@ -64,10 +69,10 @@ class FamilyUpdate extends React.Component {
           fade={false}
           fullscreen
           scrollable
-          toggle={function noRefCheck() {}}
+          // toggle={function noRefCheck() {}}
         >
           <ModalHeader toggle={function noRefCheck() {}}>
-            Update Family Member Info
+            Update Family Member Information
           </ModalHeader>
           <ModalBody>
             <Form>
@@ -76,14 +81,13 @@ class FamilyUpdate extends React.Component {
                 <Input
                   type="text"
                   name="famMember"
-                  id="userName"
+                  id="famMember"
                   placeholder="User name"
-                  value={this.props.familyMemberData.famMember}
-                  onChange={(e) =>
-                    console.log(this.setState({ famMember: e.target.value }))
-                  }
+                  value={this.state.famMember}
+                  onChange={(e) => this.setState({ famMember: e.target.value })}
                 />
               </FormGroup>
+
               <FormGroup>
                 <Label for="famAge">Age</Label>
                 <Input
@@ -91,10 +95,11 @@ class FamilyUpdate extends React.Component {
                   name="famAge"
                   id="famAge"
                   placeholder="Age"
-                  value={this.props.familyMemberData.famAge}
+                  value={this.state.famAge}
                   onChange={(e) => this.setState({ famAge: e.target.value })}
                 />
               </FormGroup>
+
               <FormGroup
                 check
                 name="famAllergic"
@@ -105,14 +110,13 @@ class FamilyUpdate extends React.Component {
                 <Label>Allergies?</Label>
                 <Input type="checkbox" />
               </FormGroup>
-              <Button onClick={this.handleSubmit}>Add Family</Button>
             </Form>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.handleSubmit}>
               Submit
             </Button>{" "}
-                <Button onClick={this.hideModal}>
+            <Button onClick={this.props.hideModal}>
               {" "}
               {/* wipe out that function and just use something like this.props.hideModal  */}
               Cancel

@@ -37,7 +37,7 @@ class FamilyIndex extends Component {
             <Container>
                 <Row>
                     <Col>
-                        <FamilyAll myFamily={this.state.myFamily} token={this.props.token}/>
+                        <FamilyAll myFamily={this.state.myFamily} token={this.props.token} fetchFamily={this.fetchFamily}/>
                     </Col>
                     <Col></Col>
                     <Col></Col>

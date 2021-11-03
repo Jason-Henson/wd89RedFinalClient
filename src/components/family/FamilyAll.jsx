@@ -43,7 +43,7 @@ class FamilyAll extends React.Component {
   displayModal = ()=> {
     // if the state for this is true call familyupdate class
     if (this.state.showModal){
-      return <FamilyUpdate token={this.state.token} familyMemberData={this.state.familyMemberData}/> 
+      return <FamilyUpdate token={this.state.token} familyMemberData={this.state.familyMemberData} hideModal={this.hideModal} fetchFamily={this.familyFetch}/> 
     } else {
       return null
     }
