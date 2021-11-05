@@ -1,4 +1,6 @@
 import React from "react";
+import FamDelete from "./FamDelete";
+
 import {
   Button,
   Form,
@@ -17,7 +19,10 @@ class FamilyUpdate extends React.Component {
     this.state = {
       famMember: this.props.familyMemberData.famMember,
       famAge: this.props.familyMemberData.famAge,
-      famAllergic: false,
+      famAllergic: this.props.familyMemberData.famAllergic,
+      token: this.props.token, // pass to family delete
+      familyMemberData: this.props.familyMemberData,
+      showModal: false,
     };
   }
 
@@ -25,8 +30,11 @@ class FamilyUpdate extends React.Component {
     if (localStorage.getItem("token")) {
       this.setState({ sessionToken: localStorage.getItem("token") });
       console.log("family member data", this.props.familyMemberData);
+      this.props.generateTable()
     }
   }
+
+
   handleSubmit = (e) => {
     //your ID can come from this.props.familyData.id
     e.preventDefault();
@@ -37,6 +45,7 @@ class FamilyUpdate extends React.Component {
           famMember: this.state.famMember,
           famAge: this.state.famAge,
           famAllergic: this.state.famAllergic,
+          
         },
       }),
       headers: new Headers({
@@ -47,21 +56,19 @@ class FamilyUpdate extends React.Component {
       .then((res) => res.json())
       .then((fetchResult) => {
         console.log(fetchResult)
-        this.props.hideModal()
-        this.familyFetch()
       })
+      .then(this.props.generateTable())
+      .then(this.props.hideModal())
       .catch((err) => console.log(err));
   };
-
+  
   hideModal = () => {
     this.setState({ showModal: false });
   };
+
   render() {
     return (
       <div>
-        {/* <Button color="danger" onClick={function noRefCheck() {}}>
-          Jason
-        </Button> */}
         <Modal
           isOpen={true}
           backdrop={false}
@@ -71,7 +78,7 @@ class FamilyUpdate extends React.Component {
           scrollable
           // toggle={function noRefCheck() {}}
         >
-          <ModalHeader toggle={function noRefCheck() {}}>
+          <ModalHeader>
             Update Family Member Information
           </ModalHeader>
           <ModalBody>
@@ -114,11 +121,10 @@ class FamilyUpdate extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.handleSubmit}>
-              Submit
+              Update
             </Button>{" "}
             <Button onClick={this.props.hideModal}>
               {" "}
-              {/* wipe out that function and just use something like this.props.hideModal  */}
               Cancel
             </Button>
           </ModalFooter>

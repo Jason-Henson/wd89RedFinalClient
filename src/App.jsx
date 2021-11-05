@@ -37,7 +37,6 @@ class App extends React.Component {
         <h1>My Med Minder</h1>
         {/* <Signup updateToken={this.updateToken}/> */}
         <Login updateToken={this.updateToken} />
-        {/* <FamilyAdd updateToken={this.updateToken} token={this.state.sessionToken}/> */}
         <FamilyIndex updateToken={this.updateToken} token={this.state.sessionToken}/>
       </div>
     )
