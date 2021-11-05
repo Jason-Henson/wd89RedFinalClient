@@ -68,6 +68,8 @@ class FamDelete extends React.Component {
             Click the REMOVE button if you wish to remove the selected family
             member. This change cannot be undone. If you do not wish to remove
             this family member please click the cancel button.
+            <br />
+            <hr />
             <Form>
               <FormGroup>
                 <Label for="famMember">Family Member Name</Label>
