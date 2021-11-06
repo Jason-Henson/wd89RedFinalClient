@@ -5,6 +5,7 @@ import FamilyAdd from "./components/family/FamilyAdd";
 import FamilyAll from "./components/family/FamilyAll";
 import FamilyIndex from "./components/family/FamilyIndex";
 import FamilyUpdate from "./components/family/FamUpdate";
+import AppointAdd from "./components/appointments/AppointAdd";
 
 class App extends React.Component {
   constructor(props) {
@@ -37,7 +38,8 @@ class App extends React.Component {
         <h1>My Med Minder</h1>
         {/* <Signup updateToken={this.updateToken}/> */}
         <Login updateToken={this.updateToken} />
-        <FamilyIndex updateToken={this.updateToken} token={this.state.sessionToken}/>
+        {/* <FamilyIndex updateToken={this.updateToken} token={this.state.sessionToken}/> */}
+        <AppointAdd updateToken={this.updateToken} token={this.state.sessionToken}/>
       </div>
     )
   }
