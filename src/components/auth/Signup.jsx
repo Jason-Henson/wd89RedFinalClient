@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 class Signup extends React.Component {
@@ -50,7 +50,6 @@ class Signup extends React.Component {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="email">Email</Label>
             <Input
               type="email"
               name="email"
@@ -61,7 +60,6 @@ class Signup extends React.Component {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="passWord">Password</Label>
             <Input
               type="passWord"
               name="passWord"
