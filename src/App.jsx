@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import Login from "./components/auth/Login";
 import AppointIndex from "./components/appointments/AppointIndex";
+import AppointAdd from "./components/appointments/AppointAdd";
 
 class App extends React.Component {
   constructor(props) {

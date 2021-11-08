@@ -1,7 +1,6 @@
 import React from "react";
 import { Table, Button } from 'reactstrap';
-import AppointIndex from "./AppointIndex";
-import ApppointUpdate from "./AppointUpdate";
+import AppointUpdate from "./AppointUpdate";
 import AppointDelete from "./AppointDelete";
 
 class AppointAll extends React.Component {
@@ -27,8 +26,8 @@ class AppointAll extends React.Component {
                 <td>{appointment.appTime}</td>
                 <td>{appointment.appLoc}</td>
                 <td>{appointment.appDoc}</td>
-                <td>{appointment.appNotes}</td>
-                <td><Button color="primary" onClick={() => this.clickUpdate(appointment)}>Change</Button></td>
+                {/* <td>{appointment.appNotes}</td> */}
+                <td><Button color="primary" onClick={() => this.clickUpdate(appointment)}>View/Change</Button></td>
                 <td><Button color="secondary" onClick={() => this.clickDelete(appointment)} >Cancel</Button> </td>
             </tr>
         )
@@ -56,7 +55,7 @@ class AppointAll extends React.Component {
   displayModal = ()=> {
     // if the state for this is true call familyUpdate class
     if (this.state.showModal){
-      return <ApppointUpdate token={this.state.token} familyMemberData={this.state.familyMemberData} hideModal={this.hideModal} generateTable={this.generateTable}/> 
+      return <AppointUpdate token={this.state.token} appointmentData={this.state.appointmentData} hideModal={this.hideModal} generateTable={this.generateTable}/> 
     } else {
       return null
     }
@@ -66,7 +65,7 @@ class AppointAll extends React.Component {
   displayModalDelete = ()=> {
     // if the state for this is true call famDelete class
     if (this.state.showModalDelete){
-      return <AppointDelete token={this.state.token} familyMemberData={this.state.familyMemberData} closeFamilyDeleteModal={this.closeFamilyDeleteModal} generateTable={this.generateTable}/> 
+      return <AppointDelete token={this.state.token} appointmentData={this.state.appointmentData} closeFamilyDeleteModal={this.closeFamilyDeleteModal} generateTable={this.generateTable}/> 
     } else {
       return null
     }
@@ -85,7 +84,7 @@ class AppointAll extends React.Component {
               <th>Time</th>
               <th>Location</th>
               <th>Doctor</th>
-              <th>Notes</th>
+              {/* <th>Notes</th> */}
               <th></th>
               <th></th>
             </tr>

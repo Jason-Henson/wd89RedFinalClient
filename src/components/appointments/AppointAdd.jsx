@@ -100,6 +100,9 @@ class AppointAdd extends React.Component {
 
             </select>
           </FormGroup>
+          {/* <FormGroup>
+
+          </FormGroup> */}
           <FormGroup>
             <Input
               type="date"
