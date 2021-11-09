@@ -17,37 +17,57 @@ class MedsUpdate extends React.Component {
     this.state = {
       editMedFor: this.props.medData.medFor,
       editMedName: this.props.medData.medName,
-      editMedScript: this.props.medData.editMedScript,
-      editMedDesc: this.props.medData.editMedScript,
+      editMedScript: this.props.medData.medScript,
+      editMedDesc: this.props.medData.medDesc,
       editMedActive: this.props.medData.medActive,
       editMedNotes: this.props.medData.medNotes,
       token: this.props.token,
-      medData: this.props.medData,
+      medData: this.props.medsData,
       showModal: false,
+      myFamily: [],
     };
   }
 
-//   componentDidMount() {
-//     if (localStorage.getItem("token")) {
-//       this.setState({ sessionToken: localStorage.getItem("token") });
-//       console.log("family member data", this.props.medData);
-//       this.props.generateTable();
-//     }
-//   }
+/******************************************************
+   * Fetching family member name to add to drop down list
+   ******************************************************/
+
+
+ fetchFamily() {
+   console.log(this.props.medData, "line 37")
+  fetch(`http://localhost:3000/family/all/`, {
+    method: "GET",
+    headers: new Headers({
+      "Content-Type": "application/json",
+      Authorization: this.props.token,
+    }),
+  })
+    .then((res) => res.json())
+    .then((famFetchResult) => {
+      this.setState({
+        myFamily: famFetchResult,
+      });
+    })
+    .then(console.log("My Family from state variable", this.state.myFamily))
+    .catch((err) => console.log(err));
+}
+  /******************************************************
+   * Post to data base
+   ******************************************************/
 
   handleSubmit = (e) => {
-    console.log(this.props.medData.userId);
+    console.log(this.props.medData.userId, "this is coming from line 57 event fired");
     e.preventDefault();
     fetch(`http://localhost:3000/meds/${this.props.medData.id}`, {
       method: "PUT",
       body: JSON.stringify({
-        appointment: {
-            appFor: this.state.editAppFor,
-            appDate: this.state.editAppDate,
-            appTime: this.state.editAppTime,
-            appLoc: this.state.editAppLoc,
-            appDoc: this.state.editAppDoc,
-            appNotes: this.state.editAppNotes,
+        meds: {
+          medFor: this.state.editMedFor,
+          medName: this.state.editMedName,
+          medScript: this.state.editMedScript,
+          medDesc: this.state.editMedScript,
+          medActive: this.state.editMedActive,
+          medNotes: this.state.editMedNotes,
         },
       }),
       headers: new Headers({
@@ -59,14 +79,19 @@ class MedsUpdate extends React.Component {
       .then((fetchResult) => {
         console.log(fetchResult, "this is coming from update line 61");
         //pass down fetchApp instead of generateTable.
-        this.props.generateTable();
-        this.props.hideModal();
+        this.props.generateTable()
+        this.props.hideModal()
       })
+      .then(console.log(this.medData, "this is coming form line"))
   };
 
  closeUpdateModal = () => {
     this.props.hideModal();
   };
+
+  componentDidMount() {
+    this.fetchFamily()
+  }
 
   render() {
     return (
@@ -78,75 +103,79 @@ class MedsUpdate extends React.Component {
           fade={false}
           fullscreen
           scrollable
-          // toggle={function noRefCheck() {}}
         >
-          <ModalHeader>Update Appointment</ModalHeader>
+          <ModalHeader>View/Update Med Information</ModalHeader>
+          To update the information click the UPDATE button.  Or click the GO BACK button to return to the meds list.
           <ModalBody>
             <Form onSubmit={this.handleSubmit}>
-              <FormGroup>
-                <Label for="appFor">Family Member Name</Label>
-                <Input
-                  type="text"
-                  name="appFor"
-                  id="appFor"
-                  value={this.state.editAppFor}
-                  onChange={(e) => this.setState({ editAppFor: e.target.value })}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Input
-                  type="date"
-                  name="appDate"
-                  id="appDate"
-                  placeholder="Date"
-                  value={this.state.editAppDate}
-                  onChange={(e) => this.setState({ editAppDate: e.target.value })}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Input
-                  type="time"
-                  name="appTime"
-                  id="appTime"
-                  placeholder="Date"
-                  value={this.state.editAppTime}
-                  onChange={(e) => this.setState({ editAppTime: e.target.value })}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Input
-                  type="text"
-                  name="appLoc"
-                  id="appLoc"
-                  placeholder="Address"
-                  value={this.state.editAppLoc}
-                  onChange={(e) => this.setState({ editAppLoc: e.target.value })}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Input
-                  type="text"
-                  name="appDoc"
-                  id="appDoc"
-                  placeholder="Doctor"
-                  value={this.state.editAppDoc}
-                  onChange={(e) => this.setState({ editAppDoc: e.target.value })}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Input
-                  type="text"
-                  name="appNotes"
-                  id="appNotes"
-                  placeholder="Notes"
-                  value={this.state.editAppNotes}
-                  onChange={(e) => this.setState({ editAppNotes: e.target.value })}
-                />
-              </FormGroup>
+            <FormGroup>
+            <select
+              type="select"
+              name="medFor"
+              id="medFor"
+              placeholder="Family Member Name"
+              value={this.state.editMedFor}
+              onChange={(e) => this.setState({ editMedFor: e.target.value })}
+            >
+              {this.state.myFamily.map((fam) => (
+                <option value={fam.famMember}>{fam.famMember}</option>
+              ))}
+            </select>
+          </FormGroup>
+          <FormGroup>
+            <Input
+              type="text"
+              name="MedName"
+              id="MedName"
+              placeholder="Med Name"
+              value={this.state.editMedName}
+              onChange={(e) => this.setState({ editMedName: e.target.value })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Input
+              type="text"
+              name="medScript"
+              id="medScript"
+              placeholder="Script Number"
+              value={this.state.editMedScript}
+              onChange={(e) => this.setState({ editMedScript: e.target.value })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Input
+              type="text"
+              name="medDesc"
+              id="medDesc"
+              placeholder="Med Description"
+              value={this.state.editMedDesc}
+              onChange={(e) => this.setState({ editMedDesc: e.target.value })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Input
+              type="text"
+              name="medActive"
+              id="medActive"
+              placeholder="Currently Taking?"
+              value={this.state.editMedActive}
+              onChange={(e) => this.setState({ editMedActive: e.target.value })}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Input
+              type="text"
+              name="MedNotes"
+              id="MedNotes"
+              placeholder="Notes"
+              value={this.state.editMedNotes}
+              onChange={(e) => this.setState({ editMedNotes: e.target.value })}
+            />
+          </FormGroup>
             <Button color="primary">
               Update
             </Button>{" "}
-            <Button onClick={this.closeUpdateModal}> Cancel</Button>
+            <Button onClick={this.closeUpdateModal}> Go Back</Button>
             </Form>
           </ModalBody>
         </Modal>

@@ -13,7 +13,15 @@ class AppointAll extends React.Component {
       appointmentData: {},
     }
   }
-
+  dateFix = (date) => {
+    var dateObj = new Date(date);
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    
+    return month + "/" + day + "/" + year;
+  }
+  
   generateTable = () => {
     let appointments = this.props.myApp
 
@@ -22,7 +30,7 @@ class AppointAll extends React.Component {
             <tr key={index}>
                 <th scope="row">{appointment.id}</th>
                 <td>{appointment.appFor}</td>
-                <td>{appointment.appDate}</td>
+                <td>{this.dateFix(appointment.appDate)}</td>
                 <td>{appointment.appTime}</td>
                 <td>{appointment.appLoc}</td>
                 <td>{appointment.appDoc}</td>
