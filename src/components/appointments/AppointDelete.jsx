@@ -29,15 +29,14 @@ class AppointDelete extends React.Component {
     e.preventDefault();
     console.log("State ID: ", this.state.id);
     fetch(`http://localhost:3000/appointment/${this.state.appointmentData.id}`, {
-      // need to get this from state
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: this.props.token,
       }),
     })
-      .then(() => this.props.generateTable()) // need to pass props for this.
-      .then(this.props.closeFamilyDeleteModal()); // need to pass props for this.
+      .then(() => this.props.generateTable())
+      .then(this.props.closeFamilyDeleteModal())
   };
          
   render() {
