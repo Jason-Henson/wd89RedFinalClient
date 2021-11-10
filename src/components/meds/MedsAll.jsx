@@ -10,7 +10,7 @@ class MedsAll extends React.Component {
       showModal: false,
       showModalDelete: false,
       token: this.props.token,
-      MedsData: this.props.MedsData,
+      medsData: this.props.medsData,
       myMeds: this.props.myMeds,
     }
   }
@@ -56,7 +56,7 @@ class MedsAll extends React.Component {
   displayModal = ()=> {
     // if the state for this is true call familyUpdate class
     if (this.state.showModal){
-      return <MedsUpdate token={this.state.token} medData={this.state.medData} hideModal={this.hideModal} generateTable={this.generateTable}/> 
+      return <MedsUpdate token={this.props.token} medData={this.state.medData} hideModal={this.hideModal} generateTable={this.generateTable} fetchApp={this.props.fetchApp}/> 
     } else {
       return null
     }
@@ -66,7 +66,7 @@ class MedsAll extends React.Component {
   displayModalDelete = ()=> {
     // if the state for this is true call famDelete class
     if (this.state.showModalDelete){
-      return <MedsDelete token={this.state.token} medData={this.state.medData} closeFamilyDeleteModal={this.closeFamilyDeleteModal} generateTable={this.generateTable}/> 
+      return <MedsDelete token={this.props.token} medData={this.state.medData} closeFamilyDeleteModal={this.closeFamilyDeleteModal} generateTable={this.generateTable} fetchApp={this.props.fetchApp}/> 
     } else {
       return null
     }

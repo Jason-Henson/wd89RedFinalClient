@@ -32,7 +32,7 @@ class MedsDelete extends React.Component {
    ******************************************************/
 
 
- fetchFamily() {
+ fetchFamily = () => {
     console.log(this.props.medData, "line 37")
    fetch(`http://localhost:3000/family/all/`, {
      method: "GET",
@@ -62,6 +62,7 @@ class MedsDelete extends React.Component {
         }),
       }
     )
+      .then(() => this.props.fetchApp())
       .then(() => this.props.generateTable()) 
       .then(this.props.closeFamilyDeleteModal())
   }

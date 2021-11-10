@@ -78,7 +78,7 @@ class MedsUpdate extends React.Component {
       .then((res) => res.json())
       .then((fetchResult) => {
         console.log(fetchResult, "this is coming from update line 61");
-        //pass down fetchApp instead of generateTable.
+        this.props.fetchApp()
         this.props.generateTable()
         this.props.hideModal()
       })

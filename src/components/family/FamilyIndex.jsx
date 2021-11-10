@@ -10,7 +10,7 @@ class FamilyIndex extends Component {
          }
     }
 
-    fetchFamily() {
+    fetchFamily = () => {
         fetch(`http://localhost:3000/family/all/`, {
           method: "GET",
           headers: new Headers({

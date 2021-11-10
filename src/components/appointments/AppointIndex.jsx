@@ -11,7 +11,7 @@ class AppointIndex extends React.Component {
          }
     }
 
-    fetchApp() {
+    fetchApp = () =>  {
         fetch(`http://localhost:3000/appointment/all/`, {
           method: "GET",
           headers: new Headers({

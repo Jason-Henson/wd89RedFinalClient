@@ -28,15 +28,15 @@ class FamDelete extends React.Component {
     e.preventDefault();
     console.log("State ID: ", this.state.id);
     fetch(`http://localhost:3000/family/${this.state.familyMemberData.id}`, {
-      // need to get this from state
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: this.props.token,
       }),
     })
-      .then(() => this.props.generateTable()) // need to pass props for this.
-      .then(this.props.closeFamilyDeleteModal()); // need to pass props for this.
+      .then(() => this.props.fetchFamily())
+      .then(() => this.props.generateTable())
+      .then(this.props.closeFamilyDeleteModal())
   };
          
   render() {
@@ -54,20 +54,13 @@ class FamDelete extends React.Component {
           fullscreen
           scrollable
         >
-          <ModalHeader
-            close={
-              <button className="close" onClick={function noRefCheck() {}}>
-                ×
-              </button>
-            }
-            toggle={function noRefCheck() {}}
-          >
+          <ModalHeader>
             Remove Family Member
           </ModalHeader>
           <ModalBody>
             Click the REMOVE button if you wish to remove the selected family
             member. This change cannot be undone. If you do not wish to remove
-            this family member please click the cancel button.
+            this family member please click the GO BACK button.
             <br />
             <hr />
             <Form>
@@ -100,10 +93,9 @@ class FamDelete extends React.Component {
             <Button color="danger" onClick={this.RemoveFamilyMember}>
               Remove
             </Button>{" "}
-            <Button onClick={this.props.hideModal}>
+            <Button onClick={this.props.closeFamilyDeleteModal}>
               {" "}
-              {/* need to pass props for this */}
-              Cancel
+              Go Back
             </Button>
           </ModalFooter>
         </Modal>

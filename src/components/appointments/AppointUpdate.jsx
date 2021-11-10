@@ -1,5 +1,4 @@
 import React from "react";
-import AppointDelete from "./AppointDelete";
 
 import {
   Button,
@@ -28,13 +27,6 @@ class ApointUpdate extends React.Component {
     };
   }
 
-//   componentDidMount() {
-//     if (localStorage.getItem("token")) {
-//       this.setState({ sessionToken: localStorage.getItem("token") });
-//       console.log("family member data", this.props.appointmentData);
-//       this.props.generateTable();
-//     }
-//   }
 
   handleSubmit = (e) => {
     console.log(this.props.appointmentData.userId);
@@ -59,9 +51,9 @@ class ApointUpdate extends React.Component {
       .then((res) => res.json())
       .then((fetchResult) => {
         console.log(fetchResult, "this is coming from update line 61");
-        //pass down fetchApp instead of generateTable.
-        this.props.generateTable();
-        this.props.hideModal();
+        this.props.fetchApp()
+        this.props.generateTable()
+        this.props.hideModal()
       })
   };
 
@@ -79,7 +71,6 @@ class ApointUpdate extends React.Component {
           fade={false}
           fullscreen
           scrollable
-          // toggle={function noRefCheck() {}}
         >
           <ModalHeader>Update Appointment</ModalHeader>
           <ModalBody>

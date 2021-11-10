@@ -35,7 +35,6 @@ class FamilyUpdate extends React.Component {
 
 
   handleSubmit = (e) => {
-    //your ID can come from this.props.familyData.id
     e.preventDefault();
     fetch(`http://localhost:3000/family/${this.props.familyMemberData.id}`, {
       method: "PUT",
@@ -55,9 +54,10 @@ class FamilyUpdate extends React.Component {
       .then((res) => res.json())
       .then((fetchResult) => {
         console.log(fetchResult)
+        this.props.fetchFamily()
+        this.props.generateTable()
+        this.props.hideModal()
       })
-      .then(this.props.generateTable())
-      .then(this.props.hideModal())
       .catch((err) => console.log(err));
   };
   
@@ -75,7 +75,6 @@ class FamilyUpdate extends React.Component {
           fade={false}
           fullscreen
           scrollable
-          // toggle={function noRefCheck() {}}
         >
           <ModalHeader>
             Update Family Member Information

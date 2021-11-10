@@ -40,7 +40,6 @@ class FamilyAll extends React.Component {
     this.setState({ showModalDelete: true, familyMemberData: family })
   }
 
-  // create a method for setting state of showModal to false
   hideModal = () => {
     this.setState({ showModal: false })
   }
@@ -49,21 +48,17 @@ class FamilyAll extends React.Component {
       this.setState({ showModalDelete: false })
   }
 
-  // Display the modal for updating 
-  displayModal = ()=> {
-    // if the state for this is true call familyUpdate class
+  displayModal = () => {
     if (this.state.showModal){
-      return <FamilyUpdate token={this.state.token} familyMemberData={this.state.familyMemberData} hideModal={this.hideModal} generateTable={this.generateTable}/> 
+      return <FamilyUpdate token={this.props.token} familyMemberData={this.state.familyMemberData} hideModal={this.hideModal} generateTable={this.generateTable} fetchFamily={this.props.fetchFamily}/> 
     } else {
       return null
     }
   }
 
-  // display modal for deleting 
-  displayModalDelete = ()=> {
-    // if the state for this is true call famDelete class
+  displayModalDelete = () => {
     if (this.state.showModalDelete){
-      return <FamDelete token={this.state.token} familyMemberData={this.state.familyMemberData} closeFamilyDeleteModal={this.closeFamilyDeleteModal} generateTable={this.generateTable}/> 
+      return <FamDelete token={this.props.token} familyMemberData={this.state.familyMemberData} closeFamilyDeleteModal={this.closeFamilyDeleteModal} generateTable={this.generateTable} fetchFamily={this.props.fetchFamily}/> 
     } else {
       return null
     }
@@ -80,6 +75,8 @@ class FamilyAll extends React.Component {
               <th>Name</th>
               <th>Age</th>
               <th>Allergies</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

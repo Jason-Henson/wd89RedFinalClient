@@ -11,7 +11,7 @@ class MedsIndex extends React.Component {
          }
     }
 
-    fetchApp() {
+    fetchApp=()=> {
         fetch(`http://localhost:3000/meds/all/`, {
           method: "GET",
           headers: new Headers({
@@ -35,7 +35,7 @@ class MedsIndex extends React.Component {
             <Container>
                 <Row>
                     <Col>
-                        <MedsAll myMeds={this.state.myMeds} token={this.props.token} fetchApp={this.fetchApp}/>
+                        <MedsAll myMeds={this.state.myMeds} token={this.props.token} fetchApp={this.fetchApp} />
                     </Col>
                     <Col></Col>
                     <Col></Col>

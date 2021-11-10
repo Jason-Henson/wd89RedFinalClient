@@ -59,21 +59,17 @@ class AppointAll extends React.Component {
       this.setState({ showModalDelete: false })
   }
 
-  // Display the modal for updating 
   displayModal = ()=> {
-    // if the state for this is true call familyUpdate class
     if (this.state.showModal){
-      return <AppointUpdate token={this.state.token} appointmentData={this.state.appointmentData} hideModal={this.hideModal} generateTable={this.generateTable}/> 
+      return <AppointUpdate token={this.props.token} appointmentData={this.state.appointmentData} hideModal={this.hideModal} generateTable={this.generateTable} fetchApp={this.props.fetchApp}/> 
     } else {
       return null
     }
   }
 
-  // display modal for deleting 
   displayModalDelete = ()=> {
-    // if the state for this is true call famDelete class
     if (this.state.showModalDelete){
-      return <AppointDelete token={this.state.token} appointmentData={this.state.appointmentData} closeFamilyDeleteModal={this.closeFamilyDeleteModal} generateTable={this.generateTable}/> 
+      return <AppointDelete token={this.props.token} appointmentData={this.state.appointmentData} closeFamilyDeleteModal={this.closeFamilyDeleteModal} generateTable={this.generateTable} fetchApp={this.props.fetchApp}/> 
     } else {
       return null
     }
