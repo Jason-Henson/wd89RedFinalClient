@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Button } from 'reactstrap'
 import FamilyUpdate from "./FamUpdate";
 import FamDelete from "./FamDelete";
+import FamilyAdd from "./FamilyAdd";
 
 class FamilyAll extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class FamilyAll extends React.Component {
     this.state = { 
       showModal: false,
       showModalDelete: false,
+      showModalAdd: false,
       token: this.props.token,
       familyMemberData: {},
     }
@@ -18,8 +20,8 @@ class FamilyAll extends React.Component {
     let families = this.props.myFamily
 
     return families.map((family, index) => {
-        console.log(family.famAllergic)
         return(
+          
             <tr key={index}>
                 <th scope="row">{family.id}</th>
                 <td>{family.famMember}</td>
@@ -32,6 +34,8 @@ class FamilyAll extends React.Component {
     })
   }
 
+  // Toggle modal values on/true
+
   clickUpdate = (family) => {
     this.setState({ showModal: true, familyMemberData: family })
   }
@@ -40,6 +44,13 @@ class FamilyAll extends React.Component {
     this.setState({ showModalDelete: true, familyMemberData: family })
   }
 
+  clickAdd = (e) => {
+    this.setState({ showModalAdd: true });
+    this.displayModalAdd()
+  }
+
+ // Toggle modal values off/false
+
   hideModal = () => {
     this.setState({ showModal: false })
   }
@@ -47,6 +58,12 @@ class FamilyAll extends React.Component {
   closeFamilyDeleteModal = () => {
       this.setState({ showModalDelete: false })
   }
+
+  closeFamilyAddModal = () => {
+    this.setState({ showModalAdd: false })
+}
+
+// check to change in state of toggle
 
   displayModal = () => {
     if (this.state.showModal){
@@ -59,6 +76,15 @@ class FamilyAll extends React.Component {
   displayModalDelete = () => {
     if (this.state.showModalDelete){
       return <FamDelete token={this.props.token} familyMemberData={this.state.familyMemberData} closeFamilyDeleteModal={this.closeFamilyDeleteModal} generateTable={this.generateTable} fetchFamily={this.props.fetchFamily}/> 
+    } else {
+      return null
+    }
+  }
+
+  displayModalAdd = () => {
+    if (this.state.showModalAdd){
+      console.log("test")
+      return <FamilyAdd token={this.props.token} closeFamilyAddModal={this.closeFamilyAddModal} generateTable={this.generateTable} fetchFamily={this.props.fetchFamily}/> 
     } else {
       return null
     }
@@ -85,6 +111,7 @@ class FamilyAll extends React.Component {
         </Table>
        {this.displayModal()}
        {this.displayModalDelete()}
+       <div><Button color="primary" onClick={() => this.clickAdd()}>Add Family Member</Button></div>
       </div>
     );
   }

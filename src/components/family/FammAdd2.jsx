@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from "reactstrap";
 
 
-class FamilyAdd extends React.Component {
+class FamilyAdd2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,20 +44,7 @@ class FamilyAdd extends React.Component {
 
   render() {
     return (
-      <div>
-        <Modal
-          isOpen={true}
-          backdrop={false}
-          centered
-          fade={false}
-          fullscreen
-          scrollable
-        >
-          <ModalHeader>
-            Add Family Member Information
-          </ModalHeader>
-          <ModalBody>
-          <Form>
+        <Form>
           <h1>Add Family Members</h1>
           <FormGroup>
             <Input
@@ -92,20 +79,8 @@ class FamilyAdd extends React.Component {
           </FormGroup>
           <Button onClick={this.handleSubmit}>Add Family</Button>
         </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.handleSubmit}>
-              Update
-            </Button>{" "}
-            <Button onClick={this.props.hideModal}>
-              {" "}
-              Cancel
-            </Button>
-          </ModalFooter>
-        </Modal>
-        </div>
     );
   }
 }
 
-export default FamilyAdd;
+export default FamilyAdd2;

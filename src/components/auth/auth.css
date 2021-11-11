@@ -1,0 +1,17 @@
+.SplashPage {
+    display: flex;
+    flex-wrap: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+
+  .Login {
+    display: flex;
+    flex-wrap: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }

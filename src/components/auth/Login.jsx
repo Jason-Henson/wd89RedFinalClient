@@ -31,17 +31,19 @@ class Login extends Component {
     render() {  
   
       return (
-        <div>
+        <div className="Login">
           <h1>Login</h1>
           <Form>
           <FormGroup>
           <Input type="text" name="userName" id="userName" placeholder="User name" value={this.state.userName} onChange={(e) => this.setState({userName: e.target.value})} />
         </FormGroup>
         <FormGroup>
-          <Input type="passwordhash" name="passwordhash" id="passwordhash" placeholder="Password" value={this.state.passWord} onChange={(e) => this.setState({passWord: e.target.value})} />
+          <Input type="password" name="passwordhash" id="passwordhash" placeholder="Password" value={this.state.passWord} onChange={(e) => this.setState({passWord: e.target.value})} />
         </FormGroup>
-        <Button onClick={this.handleSubmit}>Login</Button>
+        <Button onClick={this.handleSubmit} align="center">Login</Button>
       </Form>
+
+      
         </div>
       );
     }
