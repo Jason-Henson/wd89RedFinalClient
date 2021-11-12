@@ -1,10 +1,12 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import {
   Button,
   Form,
   FormGroup,
   Input,
 } from "reactstrap";
+import "./appointment.css"
 
 class AppointAdd extends React.Component {
   constructor(props) {
@@ -18,6 +20,7 @@ class AppointAdd extends React.Component {
       appDoc: "",
       appNotes: "",
       UserId: "",
+      appointmentAdd: false,
     };
   }
 
@@ -76,19 +79,25 @@ class AppointAdd extends React.Component {
       .then((res) => res.json())
       .then((fetchResult) => {
         console.log(fetchResult);
+        this.setState({ appointmentAdd: true  })
       })
       .catch((err) => console.log(err));
   };
 
+  addAppointment = () => {
+    console.log("addAppointment fir")
+    this.setState({ appointmentAdd: true })
+  }
   
 
   render() {
     return (
-      <div>
+      <div className="addAppointments">
         <h1>Add Appointments</h1>
         <Form>
           <FormGroup>
             <select 
+            className="dropDowns"
             type="select"
             name="appFor"
             id="appFor"
@@ -155,6 +164,7 @@ class AppointAdd extends React.Component {
             </FormGroup>
           <Button onClick={this.handleSubmit}>Add</Button>
         </Form>
+        { this.state.appointmentAdd && <Redirect to="/appointmentindex" />}
       </div>
     );
   }

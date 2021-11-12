@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { Button, Form, FormGroup,  Input } from "reactstrap";
 
 class Login extends Component {
@@ -8,7 +9,7 @@ class Login extends Component {
       this.state = {
         userName: "",
         passWord: "",
-        sessionToken: "", 
+        sessionToken: "",
       };
     }
 
@@ -24,7 +25,10 @@ class Login extends Component {
       .then((res) => res.json())
       .then((fetchResult) => {
         this.props.updateToken(fetchResult.sessionToken)
+        this.props.logInToggle()
         console.log(fetchResult)
+        this.checkLogIn()
+
       })
     }
   
@@ -42,8 +46,7 @@ class Login extends Component {
         </FormGroup>
         <Button onClick={this.handleSubmit} align="center">Login</Button>
       </Form>
-
-      
+      { this.props.isLoggedIn && <Redirect to="/appointmentindex" />}
         </div>
       );
     }

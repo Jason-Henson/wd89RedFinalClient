@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-dom";
 import {
   Navbar,
   NavbarBrand,
@@ -10,9 +9,6 @@ import {
   NavLink,
   noRefCheck,
 } from "reactstrap";
-import AppointAll from "../appointments/AppointAll";
-
-//import switch and route
 
 class NavBar extends React.Component {
   constructor(props) {

@@ -38,7 +38,8 @@ class AppointIndex extends React.Component {
             <Container>
                 <Row>
                     <Col>
-                        <AppointAll myApp={this.state.myApp} token={this.props.token} fetchApp={this.fetchApp}/>
+                        { this.state.myApp && <AppointAll myApp={this.state.myApp} token={this.props.token} fetchApp={this.fetchApp} />}
+                        {/* <AppointAll myApp={this.state.myApp} token={this.props.token} fetchApp={this.fetchApp}/> */}
                     </Col>
                     <Col></Col>
                     <Col></Col>

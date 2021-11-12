@@ -1,0 +1,13 @@
+.addAppointments {
+    display: flex;
+    flex-wrap: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.dropDowns {
+    height: 40px;
+    width: 200px;
+}

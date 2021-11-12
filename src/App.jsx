@@ -9,12 +9,14 @@ import NavBar from "./components/nav/NavBar";
 import SplashPage from "./components/auth/SplashPage";
 import FamilyAll from "./components/family/FamilyAll";
 import AppointAll from "./components/appointments/AppointAll";
+import AppointIndex from "./components/appointments/AppointIndex";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       sessionToken: localStorage.getItem("token") || "", // assigns token from local storage or give empty string
+      isLoggedIn: false,
     };
   }
 
@@ -23,6 +25,11 @@ class App extends React.Component {
       this.setState({ sessionToken: localStorage.getItem("token") });
     }
   }
+
+  logInToggle = () => {
+    this.setState({ isLoggedIn: !this.state.isLoggedIn })
+  }
+
 
   updateToken = (newToken) => {
     localStorage.setItem("token", newToken);
@@ -46,7 +53,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/login">
               <Login updateToken={this.updateToken}
-                token={this.state.sessionToken}/>
+                token={this.state.sessionToken} logInToggle={this.logInToggle} isLoggedIn={this.state.isLoggedIn} />
             </Route>
             <Route exact path="/register">
               <Signup />
@@ -65,6 +72,9 @@ class App extends React.Component {
                 updateToken={this.updateToken}
                 token={this.state.sessionToken}
               />
+            </Route>
+            <Route exact path="/appointmentindex">
+              <AppointIndex updateToken={this.updateToken} token={this.state.sessionToken} />
             </Route>
             <Route exact path="/appointmentall">
               <AppointAll

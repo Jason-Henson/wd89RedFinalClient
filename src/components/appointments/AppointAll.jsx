@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, Redirect } from "react-router-dom";
 import { Table, Button } from 'reactstrap';
 import AppointUpdate from "./AppointUpdate";
 import AppointDelete from "./AppointDelete";
@@ -11,8 +12,15 @@ class AppointAll extends React.Component {
       showModalDelete: false,
       token: this.props.token,
       appointmentData: {},
+      appointmentAdd: false, 
     }
   }
+
+  componentDidMount() {
+    this.props.fetchApp()
+    this.generateTable(this.props.myApp)
+  }
+
   dateFix = (date) => {
     var dateObj = new Date(date);
     var month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -23,6 +31,10 @@ class AppointAll extends React.Component {
   }
   
   generateTable = () => {
+    if(this.props.myApp === undefined) {
+      this.props.fetchApp()
+    } 
+    console.log(this.props.myApp, "line 32 appAll")
     let appointments = this.props.myApp
 
     return appointments.map((appointment, index) => {
@@ -75,6 +87,11 @@ class AppointAll extends React.Component {
     }
   }
 
+  addAppointment = () => {
+    console.log("addAppointment fir")
+    this.setState({ appointmentAdd: true })
+  }
+
   render() {
     return (
       <div>
@@ -97,6 +114,8 @@ class AppointAll extends React.Component {
               {this.generateTable()}
           </tbody>
         </Table>
+        <Button color="primary" onClick={() => this.addAppointment()}>New Appointment</Button>
+        { this.state.appointmentAdd && <Redirect to="/appointmentadd" /> }
        {this.displayModal()}
        {this.displayModalDelete()}
       </div>
