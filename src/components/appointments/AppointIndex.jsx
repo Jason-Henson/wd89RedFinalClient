@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom"
 import {Container, Row, Col} from 'reactstrap';
 import AppointAll from "./AppointAll";
 
@@ -38,8 +39,8 @@ class AppointIndex extends React.Component {
             <Container>
                 <Row>
                     <Col>
+                        { !this.props.token && <Redirect to="/" />}
                         { this.state.myApp && <AppointAll myApp={this.state.myApp} token={this.props.token} fetchApp={this.fetchApp} />}
-                        {/* <AppointAll myApp={this.state.myApp} token={this.props.token} fetchApp={this.fetchApp}/> */}
                     </Col>
                     <Col></Col>
                     <Col></Col>

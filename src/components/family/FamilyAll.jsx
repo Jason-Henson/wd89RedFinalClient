@@ -34,6 +34,10 @@ class FamilyAll extends React.Component {
     })
   }
 
+  componentDidMount() {
+    this.generateTable()
+  }
+
   // Toggle modal values on/true
 
   clickUpdate = (family) => {

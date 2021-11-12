@@ -2,14 +2,18 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
-import AppointAdd from "./components/appointments/AppointAdd";
-import MedsAll from "./components/meds/MedsAll";
-import FamilyAdd from "./components/family/FamilyAdd";
 import NavBar from "./components/nav/NavBar";
 import SplashPage from "./components/auth/SplashPage";
-import FamilyAll from "./components/family/FamilyAll";
-import AppointAll from "./components/appointments/AppointAll";
 import AppointIndex from "./components/appointments/AppointIndex";
+import AppointAll from "./components/appointments/AppointAll";
+import AppointAdd from "./components/appointments/AppointAdd";
+import FamilyIndex from "./components/family/FamilyIndex";
+import FamilyAll from "./components/family/FamilyAll";
+import FamilyAdd from "./components/family/FamilyAdd";
+import MedsIndex from "./components/meds/MedsIndex";
+import MedsAll from "./components/meds/MedsAll";
+import MedsAdd from "./components/meds/MedsAdd";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -56,10 +60,13 @@ class App extends React.Component {
                 token={this.state.sessionToken} logInToggle={this.logInToggle} isLoggedIn={this.state.isLoggedIn} />
             </Route>
             <Route exact path="/register">
-              <Signup />
+              <Signup token={this.state.sessionToken} logInToggle={this.logInToggle} isLoggedIn={this.state.isLoggedIn} updateToken={this.updateToken} />
             </Route>
             <Route exact path="/">
               <SplashPage />
+            </Route>
+            <Route exact path="/familyindex">
+              <FamilyIndex token={this.state.sessionToken} />
             </Route>
             <Route exact path="/familyall">
               <FamilyAll
@@ -88,8 +95,14 @@ class App extends React.Component {
                 token={this.state.sessionToken}
               />
             </Route>
+            <Route exact path="/medsindex">
+              <MedsIndex 
+                updateToken={this.updateToken}
+                token={this.state.sessionToken}
+              />
+            </Route>
             <Route exact path="/medsall">
-              <MedsAll
+              <MedsAll 
                 updateToken={this.updateToken}
                 token={this.state.sessionToken}
               />

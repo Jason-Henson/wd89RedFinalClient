@@ -1,5 +1,7 @@
 import React from "react";
-import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Redirect } from "react-router-dom"
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from "reactstrap";
+import FamilyIndex from "./FamilyIndex";
 
 
 class FamilyAdd extends React.Component {
@@ -42,6 +44,10 @@ class FamilyAdd extends React.Component {
       .catch((err) => console.log(err));
   };
 
+  redirectToFamilyIndex = () => {
+    return <Redirect to="/" token={this.props.sessionToken} />
+  }
+
   render() {
     return (
       <div>
@@ -67,7 +73,7 @@ class FamilyAdd extends React.Component {
               placeholder="Family Member Name"
               value={this.state.famMember}
               onChange={(e) =>
-                console.log(this.setState({ famMember: e.target.value }))
+                this.setState({ famMember: e.target.value })
               }
             />
           </FormGroup>
@@ -90,18 +96,10 @@ class FamilyAdd extends React.Component {
           >
           <Label>Allergies?</Label><Input type="checkbox" />
           </FormGroup>
-          <Button onClick={this.handleSubmit}>Add Family</Button>
+          <Button color="primary" onClick={this.handleSubmit}>Add</Button>
+          <Button color="secondary" onClick={this.redirectToFamilyIndex}>Cancel</Button>
         </Form>
           </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.handleSubmit}>
-              Update
-            </Button>{" "}
-            <Button onClick={this.props.hideModal}>
-              {" "}
-              Cancel
-            </Button>
-          </ModalFooter>
         </Modal>
         </div>
     );

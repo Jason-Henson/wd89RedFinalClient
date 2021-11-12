@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect, Link } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
@@ -36,14 +37,19 @@ class NavBar extends React.Component {
             <Collapse navbar isOpen={this.state.open}>
               <Nav navbar>
                 <NavItem>
-                  <NavLink to="/appointmentall">
+                  <Link to="/appointmentindex">
                     Appointments
-                  </NavLink>
+                  </Link>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="https://github.com/reactstrap/reactstrap">
-                    GitHub
-                  </NavLink>
+                  <Link to="/familyindex">
+                    Family
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link to="/medsindex">
+                    Meds
+                  </Link>
                 </NavItem>
               </Nav>
             </Collapse>

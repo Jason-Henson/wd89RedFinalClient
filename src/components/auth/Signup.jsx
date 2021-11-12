@@ -1,5 +1,7 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import "./auth.css";
 
 class Signup extends React.Component {
   constructor(props) {
@@ -30,21 +32,21 @@ class Signup extends React.Component {
       .then((fetchResult) => {
         this.props.updateToken(fetchResult.sessionToken);
         console.log(fetchResult);
-      });
+      })
+      .then(this.props.logInToggle())
   };
 
   render() {
     return (
-      <div>
-        <h1>Hello From Signup</h1>
+      <div className="Login">
+        <h1>Register</h1>
         <Form>
           <FormGroup>
-            <Label for="userName">User Name</Label>
             <Input
               type="text"
               name="userName"
               id="userName"
-              placeholder="User name"
+              placeholder="Username"
               value={this.state.userName}
               onChange={(e) => this.setState({ userName: e.target.value })}
             />
@@ -54,7 +56,7 @@ class Signup extends React.Component {
               type="email"
               name="email"
               id="email"
-              placeholder="email"
+              placeholder="Email"
               value={this.state.email}
               onChange={(e) => this.setState({ email: e.target.value })}
             />
@@ -71,6 +73,7 @@ class Signup extends React.Component {
           </FormGroup>
           <Button onClick={this.handleSubmit}>Sign Up</Button>
         </Form>
+        { this.props.isLoggedIn && <Redirect to="/familyadd" token={this.sessionToken} />}
       </div>
     );
   }

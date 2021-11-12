@@ -28,7 +28,6 @@ class Login extends Component {
         this.props.logInToggle()
         console.log(fetchResult)
         this.checkLogIn()
-
       })
     }
   

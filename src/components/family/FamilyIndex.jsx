@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { Redirect } from "react-router-dom";
 import {Container, Row, Col} from 'reactstrap';
 import FamilyAll from "./FamilyAll";
 
@@ -37,7 +38,9 @@ class FamilyIndex extends Component {
             <Container>
                 <Row>
                     <Col>
-                        <FamilyAll myFamily={this.state.myFamily} token={this.props.token} fetchFamily={this.fetchFamily}/>
+                        { !this.props.token && <Redirect to="/" />}
+                        { this.state.myFamily && <FamilyAll myFamily={this.state.myFamily} token={this.props.token} fetchFamily={this.fetchFamily}/> }
+                        {/* <FamilyAll myFamily={this.state.myFamily} token={this.props.token} fetchFamily={this.fetchFamily}/> */}
                     </Col>
                     <Col></Col>
                     <Col></Col>
