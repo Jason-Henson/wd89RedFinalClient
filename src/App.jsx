@@ -69,49 +69,29 @@ class App extends React.Component {
               <FamilyIndex token={this.state.sessionToken} />
             </Route>
             <Route exact path="/familyall">
-              <FamilyAll
-                updateToken={this.updateToken}
-                token={this.state.sessionToken}
-              />
+              <FamilyAll updateToken={this.updateToken}token={this.state.sessionToken}/>
             </Route>
             <Route exact path="/familyadd">
-              <FamilyAdd
-                updateToken={this.updateToken}
-                token={this.state.sessionToken}
-              />
+              <FamilyAdd updateToken={this.updateToken}token={this.state.sessionToken}/>
             </Route>
             <Route exact path="/appointmentindex">
-              <AppointIndex updateToken={this.updateToken} token={this.state.sessionToken} />
+              <AppointIndex updateToken={this.updateToken} token={this.state.sessionToken}/>
             </Route>
             <Route exact path="/appointmentall">
-              <AppointAll
-                updateToken={this.updateToken}
-                token={this.state.sessionToken}
-              />
+              <AppointAll updateToken={this.updateToken} token={this.state.sessionToken}/>
             </Route>
             <Route exact path="/appointmentadd">
-              <AppointAdd
-                updateToken={this.updateToken}
-                token={this.state.sessionToken}
-              />
+              <AppointAdd updateToken={this.updateToken} token={this.state.sessionToken}/>
             </Route>
             <Route exact path="/medsindex">
-              <MedsIndex 
-                updateToken={this.updateToken}
-                token={this.state.sessionToken}
-              />
+              <MedsIndex updateToken={this.updateToken} token={this.state.sessionToken}/>
             </Route>
-            <Route exact path="/medsall">
-              <MedsAll 
-                updateToken={this.updateToken}
-                token={this.state.sessionToken}
-              />
+            {/* <Route exact path="/medsall">
+              <MedsAll updateToken={this.updateToken} token={this.state.sessionToken}/>
             </Route>
+            */}
             <Route exact path="/medsadd">
-              <MedsAll
-                updateToken={this.updateToken}
-                token={this.state.sessionToken}
-              />
+              <MedsAdd updateToken={this.updateToken} token={this.state.sessionToken}/>
             </Route>
           </Switch>
         </Router>

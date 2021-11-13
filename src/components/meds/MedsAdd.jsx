@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 
 class MedsAdd extends React.Component {
@@ -14,6 +15,7 @@ class MedsAdd extends React.Component {
       medActive: "",
       medNotes: "",
       UserId: "",
+      medAdd: false,
     };
   }
 
@@ -75,6 +77,10 @@ class MedsAdd extends React.Component {
       })
       .catch((err) => console.log(err));
   };
+
+  goBack = () => {
+    this.setState({ medAdd: true })
+  }
 
   render() {
     return (
@@ -145,8 +151,10 @@ class MedsAdd extends React.Component {
               onChange={(e) => this.setState({ medNotes: e.target.value })}
             />
           </FormGroup>
-          <Button onClick={this.handleSubmit}>Add</Button>
+          <Button color="primary" onClick={this.handleSubmit}>Add</Button>
+          <Button color="secondary" onClick={() => this.goBack()} >Go Back</Button>
         </Form>
+        {this.state.medAdd && <Redirect to="medsindex" token={this.props.token} generateTable={this.generateTable} fetchApp={this.props.fetchApp} /> }
       </div>
     );
   }

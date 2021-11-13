@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import {Container, Row, Col} from 'reactstrap';
 import MedsAll from "./MedsAll";
 
@@ -22,7 +23,8 @@ class MedsIndex extends React.Component {
         .then((res) => res.json())
         .then((fetchResult) => {
             this.setState({myMeds: fetchResult})
-            console.log("fetch results from med all",fetchResult, "myMeds from MedIndex: ", this.myMeds) })
+         })
+         .then(console.log(this.props))
           .catch((err) => console.log(err));
       };
 
@@ -41,6 +43,7 @@ class MedsIndex extends React.Component {
                     <Col></Col>
                 </Row>
             </Container>
+            {/* { this.state.myMeds ? <Redirect to="MedsAll" myMeds={this.state.myMeds} token={this.props.token} fetchApp={this.fetchApp} /> : <></>} */}
         </> );
     }
 }

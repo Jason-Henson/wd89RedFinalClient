@@ -13,7 +13,7 @@ class SplashPage extends React.Component {
     return (
     
         <div className="SplashPage">
-           <img src="../assets/AdobeStock_97556342.jpeg" alt="splash page" />
+            <img src="../assets/splashPageImage.jpg" alt="splash page" />
             <h6><Link to="/login">Login</Link> | <Link to="/register">Register</Link></h6>
         </div>
 

@@ -27,7 +27,6 @@ class Login extends Component {
         this.props.updateToken(fetchResult.sessionToken)
         this.props.logInToggle()
         console.log(fetchResult)
-        this.checkLogIn()
       })
     }
   

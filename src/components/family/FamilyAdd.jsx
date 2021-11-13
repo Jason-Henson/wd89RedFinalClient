@@ -13,6 +13,7 @@ class FamilyAdd extends React.Component {
       famAllergic: false,
       user: { id: "" },
       UserId: "",
+      familyAdd: false,
     };
   }
 
@@ -41,28 +42,17 @@ class FamilyAdd extends React.Component {
       .then((fetchResult) => {
         console.log(fetchResult);
       })
+      .then(() => this.redirectToFamilyIndex())
       .catch((err) => console.log(err));
   };
 
   redirectToFamilyIndex = () => {
-    return <Redirect to="/" token={this.props.sessionToken} />
+    this.setState({ familyAdd: true })
   }
 
   render() {
     return (
       <div>
-        <Modal
-          isOpen={true}
-          backdrop={false}
-          centered
-          fade={false}
-          fullscreen
-          scrollable
-        >
-          <ModalHeader>
-            Add Family Member Information
-          </ModalHeader>
-          <ModalBody>
           <Form>
           <h1>Add Family Members</h1>
           <FormGroup>
@@ -97,10 +87,9 @@ class FamilyAdd extends React.Component {
           <Label>Allergies?</Label><Input type="checkbox" />
           </FormGroup>
           <Button color="primary" onClick={this.handleSubmit}>Add</Button>
-          <Button color="secondary" onClick={this.redirectToFamilyIndex}>Cancel</Button>
+          <Button color="secondary" onClick={() => this.redirectToFamilyIndex()}>Cancel</Button>
         </Form>
-          </ModalBody>
-        </Modal>
+        { this.state.familyAdd && <Redirect to="/familyindex" token={this.props.sessionToken} />}
         </div>
     );
   }

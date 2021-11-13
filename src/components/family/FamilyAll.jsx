@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { Table, Button } from 'reactstrap'
 import FamilyUpdate from "./FamUpdate";
 import FamDelete from "./FamDelete";
@@ -13,6 +14,7 @@ class FamilyAll extends React.Component {
       showModalAdd: false,
       token: this.props.token,
       familyMemberData: {},
+      familyAdd: false
     }
   }
 
@@ -48,9 +50,8 @@ class FamilyAll extends React.Component {
     this.setState({ showModalDelete: true, familyMemberData: family })
   }
 
-  clickAdd = (e) => {
-    this.setState({ showModalAdd: true });
-    this.displayModalAdd()
+  clickAdd = () => {
+    this.setState({ familyAdd: true })
   }
 
  // Toggle modal values off/false
@@ -85,15 +86,6 @@ class FamilyAll extends React.Component {
     }
   }
 
-  displayModalAdd = () => {
-    if (this.state.showModalAdd){
-      console.log("test")
-      return <FamilyAdd token={this.props.token} closeFamilyAddModal={this.closeFamilyAddModal} generateTable={this.generateTable} fetchFamily={this.props.fetchFamily}/> 
-    } else {
-      return null
-    }
-  }
-
   render() {
     return (
       <div>
@@ -116,6 +108,7 @@ class FamilyAll extends React.Component {
        {this.displayModal()}
        {this.displayModalDelete()}
        <div><Button color="primary" onClick={() => this.clickAdd()}>Add Family Member</Button></div>
+       { this.state.familyAdd && <Redirect to="/familyadd" token={this.props.token} />}
       </div>
     );
   }

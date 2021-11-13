@@ -1,10 +1,12 @@
 import React from "react";
 import { Table, Button } from 'reactstrap';
+import { Redirect } from "react-router-dom";
 import MedsUpdate from "./MedsUpdate";
 import MedsDelete from "./MedsDelete";
 
 class MedsAll extends React.Component {
   constructor(props) {
+    console.log(props);
     super(props)
     this.state = { 
       showModal: false,
@@ -12,13 +14,15 @@ class MedsAll extends React.Component {
       token: this.props.token,
       medsData: this.props.medsData,
       myMeds: this.props.myMeds,
+      clickAdd: false,
     }
   }
 
   generateTable = () => {
-    this.myMeds = this.props.myMeds
+    console.log(this.props, "this is coming from MedsAll line 22");
 
-    return this.myMeds.map((med, index) => {
+    return this.props.myMeds.map((med, index) => {
+      console.log("I'm mapping")
         return(
             <tr key={index}>
                 <th scope="row">{med.id}</th>
@@ -33,6 +37,10 @@ class MedsAll extends React.Component {
             </tr>
         )
     })
+  }
+
+  clickAdd = () => {
+    this.setState({ clickAdd: true })
   }
 
   clickUpdate = (med) => {
@@ -94,6 +102,8 @@ class MedsAll extends React.Component {
               {this.generateTable()}
           </tbody>
         </Table>
+        <Button color="primary" onClick={() => this.clickAdd()} >Add New Meds</Button>
+        { this.state.clickAdd ? <Redirect to="medsadd" token={this.props.token} generateTable={this.generateTable} fetchApp={this.props.fetchApp} /> : <></> }
        {this.displayModal()}
        {this.displayModalDelete()}
       </div>
